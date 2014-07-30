@@ -1,0 +1,28 @@
+{
+    "name": "zonuexe/http-accept-language",
+    "description": "HTTP Accept-Language Header parser",
+    "license": "MIT",
+    "version": "0.0.1",
+    "authors": [
+        {
+            "name": "USAMI Kenta",
+            "email": "tadsan@zonu.me"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "theseer/phpdox":   "0.6.*"
+        ,"phploc/phploc":   "*"
+        ,"phpunit/phpunit": "4.1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Teto\\HTTP\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Teto\\HTTP\\": "tests/"
+        }
+    }
+}
