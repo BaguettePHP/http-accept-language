@@ -1,7 +1,7 @@
 HTTP Accept-Language
 ====================
 
-![Build Status](https://travis-ci.org/zonuexe/php-http-accept-language.svg)](https://travis-ci.org/zonuexe/php-http-accept-language)
+[![Build Status](https://travis-ci.org/zonuexe/php-http-accept-language.svg?branch=v0.2.0)](https://travis-ci.org/zonuexe/php-http-accept-language)
 
 HTTP `Accept-Language` header parser for PHP
 
