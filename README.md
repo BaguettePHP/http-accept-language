@@ -1,13 +1,20 @@
 HTTP Accept-Language
 ====================
 
+![Build Status](https://travis-ci.org/zonuexe/php-http-accept-language.svg)](https://travis-ci.org/zonuexe/php-http-accept-language)
+
 HTTP `Accept-Language` header parser for PHP
+
+Description
+-----------
+
+``
 
 Requirements
 ------------
 
- * PHP (5.5+)
-   * `intl` module
+ * PHP (5.4+)
+   * `ext/intl`
 
 Usage
 -----
@@ -20,6 +27,7 @@ API
  * `Teto\HTTP\AcceptLanguage::get()`
  * `Teto\HTTP\AcceptLanguage::getLanguages()`
  * `Teto\HTTP\AcceptLanguage::parse()`
+ * `Teto\HTTP\AcceptLanguage::detect()`
 
 Reference
 ---------

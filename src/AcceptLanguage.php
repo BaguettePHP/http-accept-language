@@ -12,6 +12,10 @@ use Locale;
  */
 class AcceptLanguage
 {
+    /**
+     * @param  string $http_accept_language
+     * @return array
+     */
     public static function get($http_accept_language = '')
     {
         if (!$http_accept_language) {
@@ -26,6 +30,28 @@ class AcceptLanguage
         }
 
         return $languages;
+    }
+
+    /**
+     * @param  callable $strategy
+     * @param  string   $http_accept_language
+     * @param  mixed    $default
+     * @return mixed
+     */
+    public static function detect(callable $strategy, $default, $http_accept_language = '')
+    {
+        if (!$http_accept_language) {
+            $http_accept_language = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : '';
+        }
+
+        foreach (self::get($http_accept_language) as $lang) {
+            $result = $strategy($lang);
+            if (!empty($result)) {
+                return $result;
+            }
+        }
+
+        return $default;
     }
 
     /**

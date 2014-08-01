@@ -20,6 +20,10 @@ $greetings = array(
 
 /** @var $greeting string */
 $greeting = '';
+
+/** @var $title string */
+$title = '';
+
 foreach (\Teto\HTTP\AcceptLanguage::get() as $locale) {
     if (isset($greetings[$locale['language']])) {
         $greeting = $greetings[$locale['language']];
@@ -29,9 +33,6 @@ foreach (\Teto\HTTP\AcceptLanguage::get() as $locale) {
 }
 
 $greeting = $greeting ?: 'Yo';
-
-/** @var $title string */
-
 ?>
 <title><?= htmlspecialchars($title, ENT_HTML5, 'UTF-8') ?></title>
 <p><?= htmlspecialchars($greeting, ENT_HTML5, 'UTF-8') ?></p>
