@@ -56,16 +56,17 @@ class AcceptLanguage
 
     /**
      * @param  string $http_accept_language
+     * @param  int    $resulution of `q`(quality) value
      * @return array
      */
-    public static function getLanguages($http_accept_language)
+    public static function getLanguages($http_accept_language, $resolution = 100)
     {
         $tags = array_filter(array_map('self::parse', explode(',', $http_accept_language)));
 
         $grouped_tags = array();
         foreach ($tags as $tag) {
             list($q, $t) = $tag;
-            $intq = (int)($q * 10);
+            $intq = (int)round($q * $resolution, 0, PHP_ROUND_HALF_UP);
             if (!isset($grouped_tags[$intq])) {
                 $grouped_tags[$intq] = array();
             }

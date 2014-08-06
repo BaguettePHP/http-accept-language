@@ -40,40 +40,40 @@ class AcceptLanguageTest extends TestCase
         return [
             ['ja',
                 'expected' => [
-                    10 => [
+                    100 => [
                         ['language' => 'ja'] + $e,
                     ],
                 ],
             ],
             ['ja-Hrkt-JPN;q=0.111111',
                 'expected' => [
-                     1 => [
+                     11 => [
                          ['language' => 'ja', 'script' => 'Hrkt', 'region' => 'JP'] + $e,
                      ],
                 ],
             ],
             ['ja;q=0.9, en-GB',
                 'expected' => [
-                    10 => [
+                    100 => [
                         ['language' => 'en', 'region' => 'GB'] + $e
                      ],
-                     9 => [
+                     90 => [
                          ['language' => 'ja'] + $e
                      ],
                 ],
             ],
             ['ja-Kata;q=0.1,en_PCN;q=0.8,zh_HKG;q=0.9,tlh-Latn-US',
                 'expected' => [
-                    10 => [
+                    100 => [
                         ['language' => 'tlh', 'script' => 'Latn', 'region' => 'US'] + $e
                     ],
-                    9 => [
+                    90 => [
                         ['language' => 'zh', 'region' => 'HK'] + $e
                     ],
-                    8 => [
+                    80 => [
                         ['language' => 'en', 'region' => 'PN'] + $e
                     ],
-                    1 => [
+                    10 => [
                         ['language' => 'ja', 'script' => 'Kata'] + $e
                     ],
                 ],
