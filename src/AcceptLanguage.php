@@ -78,7 +78,8 @@ class AcceptLanguage
 
     /**
      * @param  string $locale_str LanguageTag (with quality)
-     * @return array  (float:quality, array:locale)
+     * @return array  2-tuple(float:quality, array:locale)
+     * @link   http://php.net/manual/locale.parselocale.php
      */
     public static function parse($locale_str)
     {
@@ -113,12 +114,12 @@ class AcceptLanguage
             $locale['language'] = '*';
         }
 
-        return array($q, $locale);
+        return array($q, self::fillLocaleArrayKey($locale));
     }
 
     /**
-     * @param  array $a (float:quality, array:locale)
-     * @param  array $b (float:quality, array:locale)
+     * @param  array $a 2-tuple(float:quality, array:locale)
+     * @param  array $b 2-tuple(float:quality, array:locale)
      * @return bool
      */
     private static function sort_tags(array $a, array $b)
@@ -128,5 +129,27 @@ class AcceptLanguage
         }
 
         return ($a[0] < $b[0]) ? -1 : 1;
+    }
+
+    /**
+     * @param  array $locale
+     * @return array
+     * @link   http://php.net/manual/locale.composelocale.php
+     */
+    private static function fillLocaleArrayKey(array $locale)
+    {
+        static $empty_locale = [
+            'language' => '',
+            'script'   => '',
+            'region'   => '',
+            'variant1' => '',
+            'variant2' => '',
+            'variant3' => '',
+            'private1' => '',
+            'private2' => '',
+            'private3' => '',
+        ];
+
+        return $locale + $empty_locale;
     }
 }
