@@ -95,6 +95,8 @@ class AcceptLanguage
             $is_wildcard = false;
         }
 
+        $lang_tag = str_replace('-*', '', $lang_tag);
+
         if (isset($split[1]) && strpos($split[1], 'q=') === 0) {
             $q = (float)substr($split[1], 2);
 

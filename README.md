@@ -2,13 +2,14 @@ HTTP Accept-Language
 ====================
 
 [![Build Status](https://travis-ci.org/zonuexe/php-http-accept-language.svg?branch=v0.2.0)](https://travis-ci.org/zonuexe/php-http-accept-language)
+[![Downloads this Month](https://img.shields.io/packagist/dm/zonuexe/http-accept-language.svg)](https://packagist.org/packages/zonuexe/http-accept-language)
 
 HTTP `Accept-Language` header parser for PHP
 
 Description
 -----------
 
-``
+`Teto\HTTP\AcceptLanguage` is HTTP `Accept-Language` header parser based on PHP `Locale` module.
 
 Requirements
 ------------
@@ -24,10 +25,17 @@ see `tests/public/greeting.php`.
 API
 ---
 
+ * `Teto\HTTP\AcceptLanguage::detect()`
  * `Teto\HTTP\AcceptLanguage::get()`
  * `Teto\HTTP\AcceptLanguage::getLanguages()`
  * `Teto\HTTP\AcceptLanguage::parse()`
- * `Teto\HTTP\AcceptLanguage::detect()`
+
+Features
+--------
+
+ * Accepts `*`(wildcard) tag
+   * `*-Hant-*` → `{language: '*', script: 'Hant'}`
+   * `zh-*-TW` → `{language: 'zh', region: 'TW'}`
 
 Reference
 ---------

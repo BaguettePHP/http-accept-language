@@ -88,6 +88,7 @@ class AcceptLanguageTest extends TestCase
             ['ja;q=1.00',    'expected' => [1.0, ['language' => 'ja']]],
             ['*',            'expected' => [1.0, ['language' => '*']]],
             ['*-Hant;q=0.1', 'expected' => [0.1, ['language' => '*',  'script' => 'Hant']]],
+            ['zh-*-TW',      'expected' => [1.0, ['language' => 'zh', 'region' => 'TW']]],
             ['xx',           'expected' => [1.0, ['language' => 'xx']]],
         ];
     }
