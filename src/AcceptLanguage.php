@@ -1,6 +1,7 @@
 <?php
 namespace Teto\HTTP;
 use Locale;
+use Underbar\ArrayImpl as _;
 
 /**
  * HTTP `Accept-Language` header parser
@@ -61,7 +62,7 @@ class AcceptLanguage
      */
     public static function getLanguages($http_accept_language, $resolution = 100)
     {
-        $tags = array_filter(array_map('self::parse', explode(',', $http_accept_language)));
+        $tags = array_filter(_::map(explode(',', $http_accept_language), 'Teto\HTTP\AcceptLanguage::parse'));
 
         $grouped_tags = array();
         foreach ($tags as $tag) {
