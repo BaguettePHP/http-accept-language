@@ -2,7 +2,7 @@
     "name": "zonuexe/http-accept-language",
     "description": "HTTP Accept-Language Header parser",
     "license": "MIT",
-    "version": "0.0.1",
+    "version": "0.4.0",
     "authors": [
         {
             "name": "USAMI Kenta",
