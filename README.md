@@ -15,6 +15,18 @@ Requirements
  * PHP (5.4+)
    * `ext/intl`
 
+Installation
+------------
+
+### Composer
+
+Get [Composer](https://getcomposer.org/). (use `composer` or `composer.phar` command)
+
+```
+cd /path/to/your-project
+composer require 'zonuexe/http-accept-language:~0.4.1'
+```
+
 Usage
 -----
 
