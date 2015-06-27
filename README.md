@@ -41,6 +41,8 @@ Reference
  * [HTTP/1.1: Header Field Definitions #14.4 Accept-Language](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4)
  * [RFC 4647 - Matching of Language Tags](http://tools.ietf.org/html/rfc4647)
  * [RFC 5646 - Tags for Identifying Languages](http://tools.ietf.org/html/rfc5646)
+ * [Accept-language - Slideshare](http://www.slideshare.net/tadsan/accept-language)
+ * [Accept-Languageの実装例 - Qita](http://qiita.com/tadsan/items/24cf40f067295df2ffb8)
 
 Copyright
 ---------
