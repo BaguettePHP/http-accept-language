@@ -41,40 +41,40 @@ class AcceptLanguageTest extends TestCase
             ['ja',
                 'expected' => [
                     100 => [
-                        new AcceptLanguage(['language' => 'ja'] + $e),
+                        new AcceptLanguageLocale(['language' => 'ja'] + $e),
                     ],
                 ],
             ],
             ['ja-Hrkt-JPN;q=0.111111',
                 'expected' => [
                      11 => [
-                         new AcceptLanguage(['language' => 'ja', 'script' => 'Hrkt', 'region' => 'JP'] + $e),
+                         new AcceptLanguageLocale(['language' => 'ja', 'script' => 'Hrkt', 'region' => 'JP'] + $e),
                      ],
                 ],
             ],
             ['ja;q=0.9, en-GB',
                 'expected' => [
                     100 => [
-                        new AcceptLanguage(['language' => 'en', 'region' => 'GB'] + $e),
+                        new AcceptLanguageLocale(['language' => 'en', 'region' => 'GB'] + $e),
                      ],
                      90 => [
-                         new AcceptLanguage(['language' => 'ja'] + $e),
+                         new AcceptLanguageLocale(['language' => 'ja'] + $e),
                      ],
                 ],
             ],
             ['ja-Kata;q=0.1,en_PCN;q=0.8,zh_HKG;q=0.9,tlh-Latn-US',
                 'expected' => [
                     100 => [
-                        new AcceptLanguage(['language' => 'tlh', 'script' => 'Latn', 'region' => 'US'] + $e),
+                        new AcceptLanguageLocale(['language' => 'tlh', 'script' => 'Latn', 'region' => 'US'] + $e),
                     ],
                     90 => [
-                        new AcceptLanguage(['language' => 'zh', 'region' => 'HK'] + $e),
+                        new AcceptLanguageLocale(['language' => 'zh', 'region' => 'HK'] + $e),
                     ],
                     80 => [
-                        new AcceptLanguage(['language' => 'en', 'region' => 'PN'] + $e),
+                        new AcceptLanguageLocale(['language' => 'en', 'region' => 'PN'] + $e),
                     ],
                     10 => [
-                        new AcceptLanguage(['language' => 'ja', 'script' => 'Kata'] + $e),
+                        new AcceptLanguageLocale(['language' => 'ja', 'script' => 'Kata'] + $e),
                     ],
                 ],
             ],
@@ -96,17 +96,17 @@ class AcceptLanguageTest extends TestCase
         $e = self::$empty_locale;
 
         return [
-            ['ja',           [1.0, new AcceptLanguage(['language' => 'ja'] + $e)]],
-            ['ja-JP',        [1.0, new AcceptLanguage(['language' => 'ja', 'region' => 'JP'] + $e)]],
-            ['ja-Hira',      [1.0, new AcceptLanguage(['language' => 'ja', 'script' => 'Hira'] + $e)]],
-            ['ja;q=1.0',     [1.0, new AcceptLanguage(['language' => 'ja'] + $e)]],
-            ['ja; q=1.0',    [1.0, new AcceptLanguage(['language' => 'ja'] + $e)]],
-            ['ja-JP;q=1',    [1.0, new AcceptLanguage(['language' => 'ja', 'region' => 'JP'] + $e)]],
-            ['ja;q=1.00',    [1.0, new AcceptLanguage(['language' => 'ja'] + $e)]],
-            ['*',            [1.0, new AcceptLanguage(['language' => '*'] + $e)]],
-            ['*-Hant;q=0.1', [0.1, new AcceptLanguage(['language' => '*',  'script' => 'Hant'] + $e)]],
-            ['zh-*-TW',      [1.0, new AcceptLanguage(['language' => 'zh', 'region' => 'TW'] + $e)]],
-            ['xx',           [1.0, new AcceptLanguage(['language' => 'xx'] + $e)]],
+            ['ja',           [1.0, new AcceptLanguageLocale(['language' => 'ja'] + $e)]],
+            ['ja-JP',        [1.0, new AcceptLanguageLocale(['language' => 'ja', 'region' => 'JP'] + $e)]],
+            ['ja-Hira',      [1.0, new AcceptLanguageLocale(['language' => 'ja', 'script' => 'Hira'] + $e)]],
+            ['ja;q=1.0',     [1.0, new AcceptLanguageLocale(['language' => 'ja'] + $e)]],
+            ['ja; q=1.0',    [1.0, new AcceptLanguageLocale(['language' => 'ja'] + $e)]],
+            ['ja-JP;q=1',    [1.0, new AcceptLanguageLocale(['language' => 'ja', 'region' => 'JP'] + $e)]],
+            ['ja;q=1.00',    [1.0, new AcceptLanguageLocale(['language' => 'ja'] + $e)]],
+            ['*',            [1.0, new AcceptLanguageLocale(['language' => '*'] + $e)]],
+            ['*-Hant;q=0.1', [0.1, new AcceptLanguageLocale(['language' => '*',  'script' => 'Hant'] + $e)]],
+            ['zh-*-TW',      [1.0, new AcceptLanguageLocale(['language' => 'zh', 'region' => 'TW'] + $e)]],
+            ['xx',           [1.0, new AcceptLanguageLocale(['language' => 'xx'] + $e)]],
         ];
     }
 
@@ -116,7 +116,7 @@ class AcceptLanguageTest extends TestCase
     public function test_detect($accept_language, $default, $expected)
     {
         $known_languages = ['ja', 'en', 'es', 'ko'];
-        $strategy = function (AcceptLanguage $locale) use ($known_languages) {
+        $strategy = function (AcceptLanguageLocale $locale) use ($known_languages) {
             $is_wildcard = isset($locale['language']) && $locale['language'] === '*';
             if (empty($locale['language']) && !$is_wildcard) {
                 return null;

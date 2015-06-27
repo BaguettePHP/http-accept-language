@@ -25,7 +25,7 @@ class AcceptLanguage_ObjectTest extends TestCase
 
     public function test()
     {
-        $actual = new AcceptLanguage([]);
+        $actual = new AcceptLanguageLocale([]);
 
         $this->assertSame(self::$empty_locale, $actual->getAsArray());
         foreach (self::$empty_locale as $l => $v) {
@@ -47,7 +47,7 @@ class AcceptLanguage_ObjectTest extends TestCase
      */
     public function test_set()
     {
-        $actual = new AcceptLanguage([]);
+        $actual = new AcceptLanguageLocale([]);
         $actual->error = '／(^o^)＼';
     }
 
@@ -56,7 +56,7 @@ class AcceptLanguage_ObjectTest extends TestCase
      */
     public function test_unset()
     {
-        $actual = new AcceptLanguage([]);
+        $actual = new AcceptLanguageLocale([]);
         unset($actual->error);
     }
 
@@ -65,7 +65,7 @@ class AcceptLanguage_ObjectTest extends TestCase
      */
     public function test_offsetSet()
     {
-        $actual = new AcceptLanguage([]);
+        $actual = new AcceptLanguageLocale([]);
         $actual['error'] = '／(^o^)＼';
     }
 
@@ -74,7 +74,7 @@ class AcceptLanguage_ObjectTest extends TestCase
      */
     public function test_offsetUnset()
     {
-        $actual = new AcceptLanguage([]);
+        $actual = new AcceptLanguageLocale([]);
         unset($actual['error']);
     }
 }
