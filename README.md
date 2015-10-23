@@ -1,7 +1,8 @@
 HTTP Accept-Language
 ====================
 
-[![Build Status](https://travis-ci.org/zonuexe/php-http-accept-language.svg?branch=master)](https://travis-ci.org/zonuexe/php-http-accept-language)
+[![Package version](http://img.shields.io/packagist/v/BaguettePHP/http-accept-language.svg?style=flat)](https://packagist.org/packages/zonuexe/http-accept-language)
+[![Build Status](https://travis-ci.org/BaguettePHP/http-accept-language.svg?branch=master)](https://travis-ci.org/BaguettePHP/http-accept-language)
 [![Downloads this Month](https://img.shields.io/packagist/dm/zonuexe/http-accept-language.svg)](https://packagist.org/packages/zonuexe/http-accept-language)
 
 Description
