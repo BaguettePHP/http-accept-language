@@ -13,9 +13,9 @@
 	"ext-intl": "*"
     },
     "require-dev": {
-        "theseer/phpdox":   "0.6.*"
+        "theseer/phpdox":   "^0.8.1.1"
         ,"phploc/phploc":   "*"
-        ,"phpunit/phpunit": "4.1.*"
+        ,"phpunit/phpunit": "^4.8.18"
     },
     "autoload": {
         "psr-4": {
