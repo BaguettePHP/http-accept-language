@@ -2,7 +2,6 @@
     "name": "zonuexe/http-accept-language",
     "description": "HTTP Accept-Language Header parser",
     "license": "MIT",
-    "version": "0.4.1",
     "authors": [
         {
             "name": "USAMI Kenta",
@@ -13,9 +12,9 @@
 	"ext-intl": "*"
     },
     "require-dev": {
-        "theseer/phpdox":   "^0.8.1.1"
+        "theseer/phpdox":   "^0.8"
         ,"phploc/phploc":   "*"
-        ,"phpunit/phpunit": "^4.8.18"
+        ,"phpunit/phpunit": "^5.5|^4.8"
     },
     "autoload": {
         "psr-4": {
