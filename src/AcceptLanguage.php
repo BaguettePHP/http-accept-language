@@ -56,7 +56,7 @@ class AcceptLanguage
 
     /**
      * @param  string $http_accept_language
-     * @param  int    $resulution of `q`(quality) value
+     * @param  int    $resolution Resolution of `q`(quality) value
      * @return array
      */
     public static function getLanguages($http_accept_language, $resolution = 100)
@@ -121,7 +121,7 @@ class AcceptLanguage
     /**
      * @param  array $a 2-tuple(float:quality, array:locale)
      * @param  array $b 2-tuple(float:quality, array:locale)
-     * @return bool
+     * @return int
      */
     private static function sort_tags(array $a, array $b)
     {
