@@ -23,5 +23,5 @@ build:
       -
         command: "php vendor/bin/phpunit"
         coverage:
-          file: "/build/logs/clover.xml"
+          file: "build/logs/clover.xml"
           format: "php-clover"
