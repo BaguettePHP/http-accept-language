@@ -5,9 +5,8 @@ namespace Teto\HTTP;
 /**
  * HTTP `Accept-Language` header parser
  *
- * @package   Teto\HTTP*
- * @copyright Copyright (c) 2014 USAMI Kenta
  * @author    USAMI Kenta <tadsan@zonu.me>
+ * @copyright 2016 Baguette HQ
  * @license   MIT License
  */
 class AcceptLanguage

@@ -61,4 +61,4 @@ Copyright
 
 > HTTP `Accept-Language` header parser for PHP
 >
-> Copyright (c) 2014 USAMI Kenta
+> Copyright (c) 2016 USAMI Kenta / Baguette HQ

@@ -2,9 +2,8 @@
 /**
  * Sample page for HTTP `Accept-Language` header parser
  *
- * @package   Teto\HTTP\Sample*
- * @copyright Copyright (c) 2014 USAMI Kenta
  * @author    USAMI Kenta <tadsan@zonu.me>
+ * @copyright 2016 Baguette HQ
  * @license   MIT License
  */
 namespace Teto\HTTP\Sample;
