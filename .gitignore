@@ -3,6 +3,7 @@
 /build/phploc
 /build/report
 /composer.lock
+/phan.log
 /phpunit.xml
 /vendor/*
 /.idea
