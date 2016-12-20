@@ -1,6 +1,6 @@
 <?php
+
 namespace Teto\HTTP;
-use Locale;
 
 /**
  * HTTP `Accept-Language` header parser
@@ -109,7 +109,7 @@ class AcceptLanguage
             $q = 1.0;
         }
 
-        $locale = Locale::parseLocale($lang_tag);
+        $locale = \Locale::parseLocale($lang_tag);
 
         if ($is_wildcard) {
             $locale['language'] = '*';
