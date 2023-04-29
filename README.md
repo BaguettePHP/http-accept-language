@@ -5,10 +5,15 @@ HTTP Accept-Language
 [![Build Status](https://github.com/BaguettePHP/http-accept-language/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/BaguettePHP/http-accept-language/actions)
 [![Downloads this Month](https://img.shields.io/packagist/dm/zonuexe/http-accept-language.svg)](https://packagist.org/packages/zonuexe/http-accept-language)
 
-Description
------------
+`Teto\HTTP\AcceptLanguage` is HTTP `Accept-Language` header parser based on PHP [`Locale`][Locale] module.
 
-`Teto\HTTP\AcceptLanguage` is HTTP `Accept-Language` header parser based on PHP `Locale` module.
+[Locale]: https://www.php.net/Locale
+
+## Future scope
+
+This package was designed ten years ago and is considered legacy due to its global dependencies. Over time I will provide a new package as part of the [Hakone] project.
+
+[Hakone]: https://github.com/hakonephp
 
 Requirements
 ------------
@@ -19,13 +24,8 @@ Requirements
 Installation
 ------------
 
-### Composer
-
-Get [Composer](https://getcomposer.org/). (use `composer` or `composer.phar` command)
-
 ```
-cd /path/to/your-project
-composer require 'zonuexe/http-accept-language:~0.4.1'
+composer require zonuexe/http-accept-language
 ```
 
 Usage
