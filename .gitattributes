@@ -1,0 +1,4 @@
+/.editorconfig export-ignore
+/phpstan.dist.neon export-ignore
+/phpunit.xml export-ignore
+/tests/* export-ignore
