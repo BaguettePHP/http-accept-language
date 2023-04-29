@@ -9,12 +9,12 @@
         }
     ],
     "require": {
-	"ext-intl": "*"
+        "php": ">=5.5.0",
+        "ext-intl": "*"
     },
     "require-dev": {
-        "theseer/phpdox":   "^0.8"
-        ,"phploc/phploc":   "*"
-        ,"phpunit/phpunit": "^5.5|^4.8"
+        "phpunit/phpunit": "^8.5|^7.5|^4.8",
+        "yoast/phpunit-polyfills": "^1.0"
     },
     "autoload": {
         "psr-4": {
@@ -25,5 +25,8 @@
         "psr-4": {
             "Teto\\HTTP\\": "tests/"
         }
+    },
+    "config": {
+        "sort-packages": true
     }
 }

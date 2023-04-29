@@ -1,0 +1,51 @@
+name: Test
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - '**.md'
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - '**.md'
+jobs:
+  run:
+    name: Run
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      fail-fast: false
+      matrix:
+        operating-system: [ubuntu-20.04]
+        php-versions: ['5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2']
+    env:
+      key: cache-v1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup PHP with tools
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, intl, opcache, xdebug, xml
+          tools: composer, cs2pr
+      - name: Get Composer cache directory
+        id: composer-cache-dir
+        run: |
+          echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+      - name: Restore composer cache
+        id: composer-cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+      - name: Remove composer.lock
+        run: rm -f composer.lock
+      - name: Setup Composer
+        run: composer install
+      - name: Run PHPUnit tests
+        run: vendor/bin/phpunit
