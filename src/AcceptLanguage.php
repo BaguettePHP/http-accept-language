@@ -11,6 +11,9 @@ namespace Teto\HTTP;
  */
 class AcceptLanguage
 {
+    /** @throws \BadMethodCallException */
+    private function __construct() { throw new \BadMethodCallException(); }
+
     /**
      * @param  string $http_accept_language
      * @return array
@@ -114,7 +117,7 @@ class AcceptLanguage
             $locale['language'] = '*';
         }
 
-        return array($q, self::fillLocaleArrayKey($locale));
+        return array($q, new AcceptLanguageLocale($locale));
     }
 
     /**
@@ -129,27 +132,5 @@ class AcceptLanguage
         }
 
         return ($a[0] < $b[0]) ? -1 : 1;
-    }
-
-    /**
-     * @param  array $locale
-     * @return array
-     * @link   http://php.net/manual/locale.composelocale.php
-     */
-    private static function fillLocaleArrayKey(array $locale)
-    {
-        static $empty_locale = [
-            'language' => '',
-            'script'   => '',
-            'region'   => '',
-            'variant1' => '',
-            'variant2' => '',
-            'variant3' => '',
-            'private1' => '',
-            'private2' => '',
-            'private3' => '',
-        ];
-
-        return $locale + $empty_locale;
     }
 }
