@@ -8,10 +8,11 @@ namespace Teto\HTTP;
  * @author    USAMI Kenta <tadsan@zonu.me>
  * @copyright 2016 Baguette HQ
  * @license   MIT License
+ * @phpstan-import-type accept_language_parsed from AcceptLanguage
  */
 class AcceptLanguageTest extends TestCase
 {
-    public static $empty_locale =  [
+    private const EMPTY_LOCALE = [
         'language' => '',
         'script'   => '',
         'region'   => '',
@@ -25,17 +26,22 @@ class AcceptLanguageTest extends TestCase
 
     /**
      * @dataProvider dataProviderFor_getLanguage
+     * @phpstan-param non-empty-string $accept_language
+     * @phpstan-param array<int, accept_language_parsed> $expected
      */
-    public function test_getLanguage($accept_language, $expected)
+    public function test_getLanguage(string $accept_language, array $expected): void
     {
         $actual = AcceptLanguage::getLanguages($accept_language);
 
         $this->assertEquals($expected, $actual);
     }
 
+    /**
+     * @phpstan-return iterable<array{string, expected: array<int, list<accept_language_parsed>>}>
+     */
     public function dataProviderFor_getLanguage()
     {
-        $e = self::$empty_locale;
+        $e = self::EMPTY_LOCALE;
 
         return [
             ['ja',
@@ -83,17 +89,21 @@ class AcceptLanguageTest extends TestCase
 
     /**
      * @dataProvider dataProviderFor_parse
+     * @param array{float, accept_language_parsed} $expected
      */
-    public function test_parse($tag, $expected)
+    public function test_parse(string $tag, array $expected): void
     {
         $actual = AcceptLanguage::parse($tag);
 
         $this->assertEquals($expected, $actual);
     }
 
+    /**
+     * @return iterable<array{string, expected: array{float, accept_language_parsed}}>
+     */
     public function dataProviderFor_parse()
     {
-        $e = self::$empty_locale;
+        $e = self::EMPTY_LOCALE;
 
         return [
             ['ja',           'expected' => [1.0, ['language' => 'ja'] + $e]],
@@ -113,7 +123,7 @@ class AcceptLanguageTest extends TestCase
     /**
      * @dataProvider dataProviderFor_detect
      */
-    public function test_detect($accept_language, $default, $expected)
+    public function test_detect(string $accept_language, string $default, string $expected): void
     {
         $known_languages = ['ja', 'en', 'es', 'ko'];
         $strategy = function (array $locale) use ($known_languages) {
@@ -145,6 +155,9 @@ class AcceptLanguageTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    /**
+     * @return array<array{string, default: string, expected: string}>
+     */
     public function dataProviderFor_detect()
     {
         return [

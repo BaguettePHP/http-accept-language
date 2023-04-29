@@ -2,9 +2,8 @@ HTTP Accept-Language
 ====================
 
 [![Package version](http://img.shields.io/packagist/v/zonuexe/http-accept-language.svg?style=flat)](https://packagist.org/packages/zonuexe/http-accept-language)
-[![Build Status](https://travis-ci.org/BaguettePHP/http-accept-language.svg?branch=master)](https://travis-ci.org/BaguettePHP/http-accept-language)
+[![Build Status](https://github.com/BaguettePHP/http-accept-language/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/BaguettePHP/http-accept-language/actions)
 [![Downloads this Month](https://img.shields.io/packagist/dm/zonuexe/http-accept-language.svg)](https://packagist.org/packages/zonuexe/http-accept-language)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/BaguettePHP/http-accept-language/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/BaguettePHP/http-accept-language/?branch=master)
 
 Description
 -----------
@@ -14,7 +13,7 @@ Description
 Requirements
 ------------
 
- * PHP (5.5+)
+ * PHP (7.2+)
    * `ext/intl`
 
 Installation

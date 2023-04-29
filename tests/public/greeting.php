@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sample page for HTTP `Accept-Language` header parser
  *
@@ -6,21 +7,18 @@
  * @copyright 2016 Baguette HQ
  * @license   MIT License
  */
-namespace Teto\HTTP\Sample;
-include_once dirname(dirname(__DIR__)) . '/vendor/autoload.php';
 
-/** @var $greetings array */
-$greetings = array(
+include_once __DIR__ . '/../../vendor/autoload.php';
+
+$greetings = [
     'tlh' => "nuqneH",
     'zh'  => "你好",
     'ja'  => "こんにちは",
     'en'  => "Hello",
-);
+];
 
-/** @var $greeting string */
 $greeting = '';
 
-/** @var $title string */
 $title = '';
 
 foreach (\Teto\HTTP\AcceptLanguage::get() as $locale) {
@@ -38,7 +36,7 @@ $greeting = $greeting ?: 'Yo';
 <code><pre>
 <?= htmlspecialchars(json_encode(
             \Teto\HTTP\AcceptLanguage::getLanguages($_SERVER['HTTP_ACCEPT_LANGUAGE']),
-            JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE),
+            JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) ?: '',
             ENT_HTML5, 'UTF-8'
         ) ?>
 </pre></code>

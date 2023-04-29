@@ -2,18 +2,53 @@
 
 namespace Teto\HTTP;
 
+use function array_filter;
+use function array_map;
+use function explode;
+use function is_numeric;
+use function krsort;
+use function round;
+use function str_replace;
+use function strlen;
+use function strpos;
+use function substr;
+use const PHP_ROUND_HALF_UP;
+use const SORT_NUMERIC;
+
 /**
  * HTTP `Accept-Language` header parser
  *
  * @author    USAMI Kenta <tadsan@zonu.me>
  * @copyright 2016 Baguette HQ
  * @license   MIT License
+ * @phpstan-type accept_language_parsed array{
+ *     language: string,
+ *     script: string,
+ *     region: string,
+ *     variant1: string,
+ *     variant2: string,
+ *     variant3: string,
+ *     private1: string,
+ *     private2: string,
+ *     private3: string
+ * }
+ * @phpstan-type accept_language_sparse array{
+ *     language: string,
+ *     script?: string,
+ *     region?: string,
+ *     variant1?: string,
+ *     variant2?: string,
+ *     variant3?: string,
+ *     private1?: string,
+ *     private2?: string,
+ *     private3?: string
+ * }
  */
 class AcceptLanguage
 {
     /**
      * @param  string $http_accept_language
-     * @return array
+     * @phpstan-return list<accept_language_parsed>
      */
     public static function get($http_accept_language = '')
     {
@@ -21,8 +56,8 @@ class AcceptLanguage
             $http_accept_language = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : '';
         }
 
-        $languages = array();
-        foreach (self::getLanguages($http_accept_language) as $q => $quality_group) {
+        $languages = [];
+        foreach (self::getLanguages($http_accept_language) as $quality_group) {
             foreach ($quality_group as $lang) {
                 $languages[] = $lang;
             }
@@ -32,10 +67,12 @@ class AcceptLanguage
     }
 
     /**
-     * @param  callable $strategy
+     * @template TReturn
+     * @template TDefault
+     * @param callable(array<string, string>): TReturn $strategy
      * @param  string   $http_accept_language
-     * @param  mixed    $default
-     * @return mixed
+     * @phpstan-param TDefault $default
+     * @phpstan-return TReturn|TDefault~null
      */
     public static function detect(callable $strategy, $default, $http_accept_language = '')
     {
@@ -54,22 +91,22 @@ class AcceptLanguage
     }
 
     /**
-     * @param  string $http_accept_language
-     * @param  int    $resolution Resolution of `q`(quality) value
-     * @return array
+     * @param non-empty-string $http_accept_language
+     * @param positive-int $resolution Resolution of `q`(quality) value
+     * @return array<int, list<accept_language_parsed>>
      */
     public static function getLanguages($http_accept_language, $resolution = 100)
     {
         $tags = array_filter(array_map(self::class . '::parse', explode(',', $http_accept_language)));
 
-        $grouped_tags = array();
-        foreach ($tags as $tag) {
-            list($q, $t) = $tag;
+        $grouped_tags = [];
+        foreach ($tags as [$q, $tag]) {
             $intq = (int)round($q * $resolution, 0, PHP_ROUND_HALF_UP);
-            if (!isset($grouped_tags[$intq])) {
-                $grouped_tags[$intq] = array();
+            if (isset($grouped_tags[$intq])) {
+                $grouped_tags[$intq][] = $tag;
+            } else {
+                $grouped_tags[$intq] = [$tag];
             }
-            $grouped_tags[$intq][] = $t;
         }
         krsort($grouped_tags, SORT_NUMERIC);
 
@@ -78,14 +115,15 @@ class AcceptLanguage
 
     /**
      * @param  string $locale_str LanguageTag (with quality)
-     * @return array  2-tuple(float:quality, array:locale)
      * @link   http://php.net/manual/locale.parselocale.php
+     * @return array  2-tuple(float:quality, array:locale)
+     * @phpstan-return array{}|array{float, accept_language_parsed}
      */
     public static function parse($locale_str)
     {
         $split = array_map('trim', explode(';', $locale_str, 2));
         if (!isset($split[0]) || strlen($split[0]) === 0) {
-            return array();
+            return [];
         }
 
         if (strpos($split[0], '*') === 0) {
@@ -102,12 +140,13 @@ class AcceptLanguage
             $q = (float)substr($split[1], 2);
 
             if (!is_numeric($q) || $q <= 0 || 1 < $q) {
-                return array();
+                return [];
             }
         } else {
             $q = 1.0;
         }
 
+        /** @phpstan-var accept_language_sparse */
         $locale = \Locale::parseLocale($lang_tag);
 
         if ($is_wildcard) {
@@ -118,27 +157,13 @@ class AcceptLanguage
     }
 
     /**
-     * @param  array $a 2-tuple(float:quality, array:locale)
-     * @param  array $b 2-tuple(float:quality, array:locale)
-     * @return int
-     */
-    private static function sort_tags(array $a, array $b)
-    {
-        if ($a[0] === $b[0]) {
-            return 0;
-        }
-
-        return ($a[0] < $b[0]) ? -1 : 1;
-    }
-
-    /**
-     * @param  array $locale
-     * @return array
+     * @phpstan-param accept_language_sparse $locale
+     * @phpstan-return accept_language_parsed
      * @link   http://php.net/manual/locale.composelocale.php
      */
-    private static function fillLocaleArrayKey(array $locale)
+    private static function fillLocaleArrayKey(array $locale): array
     {
-        static $empty_locale = [
+        return $locale + [
             'language' => '',
             'script'   => '',
             'region'   => '',
@@ -149,7 +174,5 @@ class AcceptLanguage
             'private2' => '',
             'private3' => '',
         ];
-
-        return $locale + $empty_locale;
     }
 }
