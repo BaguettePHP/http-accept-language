@@ -1,5 +1,6 @@
 HTTP Accept-Language header parser for PHP
-Copyright (c) 2016 USAMI Kenta / Baguette HQ
+
+Copyright (c) 2016 Baguette HQ / USAMI Kenta
 
 MIT License
 
